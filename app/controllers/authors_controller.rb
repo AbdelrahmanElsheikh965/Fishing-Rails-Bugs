@@ -24,7 +24,7 @@ class AuthorsController < ApplicationController
     @author = Author.new(author_params)
     respond_to do |format|
       if @author.save
-        format.html { redirect_to author_path(@author), notice: "Author was successfully created." }
+        format.html { redirect_to author_url(@author), notice: "Author was successfully created." }
         format.json { render :show, status: :created, location: @author }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -51,7 +51,7 @@ class AuthorsController < ApplicationController
     @author.destroy!
 
     respond_to do |format|
-      format.html { redirect_to author_url, notice: "Author was successfully destroyed." }
+      format.html { redirect_to "/authors", notice: "Author was successfully destroyed." }
       format.json { head :no_content }
     end
   end
