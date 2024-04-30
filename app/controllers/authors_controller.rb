@@ -21,17 +21,16 @@ class AuthorsController < ApplicationController
 
   # POST /authors or /authors.json
   def create
-    # @author = Author.new(author_params)
-    puts "#{"params--------------" + author_params}"
-    # respond_to do |format|
-    #   if @author.save
-    #     format.html { redirect_to author_path(@author), notice: "Author was successfully created." }
-    #     format.json { render :show, status: :created, location: @author }
-    #   else
-    #     format.html { render :new, status: :unprocessable_entity }
-    #     format.json { render json: @author.errors, status: :unprocessable_entity }
-    #   end
-    # end
+    @author = Author.new(author_params)
+    respond_to do |format|
+      if @author.save
+        format.html { redirect_to author_path(@author), notice: "Author was successfully created." }
+        format.json { render :show, status: :created, location: @author }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @author.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # PATCH/PUT /authors/1 or /authors/1.json
@@ -65,6 +64,6 @@ class AuthorsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def author_params
-      params.require(:authors).permit(:name)
+      params.require(:author).permit(:name)
     end
 end
